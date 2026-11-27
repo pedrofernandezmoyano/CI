@@ -27,16 +27,14 @@ jobs:
         run: npm ci
 
       - name: Compilar aplicación Angular
-        # Sustituye <repo> por el nombre de tu repositorio en GitHub
-        run: npx ng build --base-href /<repo>/
+        run: npx ng build --base-href /CI/
 
       - name: Subir artefacto de GitHub Pages
         # Solo se sube en push (no en pull_request)
         if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3
         with:
-          # Ajusta la ruta si tu angular.json saca el build a dist/<proyecto> en vez de .../browser
-          path: dist/<tu-proyecto>/browser
+          path: dist/cicd-angular/browser
 
   deploy:
     # Espera a que termine build y solo corre en push a main
